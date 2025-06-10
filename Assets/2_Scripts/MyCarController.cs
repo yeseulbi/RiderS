@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class MyCarController : MonoBehaviour
 {
@@ -21,18 +22,38 @@ public class MyCarController : MonoBehaviour
             surfaceEffector2D = effector;
         }
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<SurfaceEffector2D>(out var effector))
+        {
+            onGround = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+            GameManager.Instance.GameStop();
+            Debug.Log($"oops! ({onGround})");
+        }
+    }
 
     private void Update()
     {
         if (surfaceEffector2D == null) return;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            surfaceEffector2D.speed = 10f;
-        }
+        if (Input.GetKey(KeyCode.RightArrow))
+            surfaceEffector2D.speed = surfaceEffector2D.speed < 15f ? surfaceEffector2D.speed + 3f*Time.deltaTime : 15f;
+
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            surfaceEffector2D.speed = 5f;
+            surfaceEffector2D.speed = 1f;
+        }
+        else
+        {
+            surfaceEffector2D.speed = surfaceEffector2D.speed > 5f ? surfaceEffector2D.speed - 3f * Time.deltaTime : surfaceEffector2D.speed + 3f * Time.deltaTime;
         }
         UIManager.Instance.UpdateSurfaceText($"Surface Speed : {surfaceEffector2D.speed:F1}");
 
@@ -43,10 +64,14 @@ public class MyCarController : MonoBehaviour
         UIManager.Instance.UpdateCarSpeedText($"Car Speed : {rb.linearVelocity.magnitude:F1}");
     }
 
+    private void FixedUpdate()
+    {
+        if (!onGround&&Input.GetKey(KeyCode.RightArrow))
+                rb.AddTorque(-1.5f);
+    }
+
     private void Jump()
     {
-        onGround = false;
-
         if (rb == null) return;
 
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
