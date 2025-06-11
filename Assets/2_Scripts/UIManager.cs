@@ -10,8 +10,11 @@ public class UIManager : MonoBehaviour
     public Text carSpeedText;
     public Text currentTimeText;
     public Text fastTimeText;
+
+    public Text RotateCount;
     public GameObject panel;
 
+    public Animator RotateCount_Animator;
     void Awake()
     {
         if (Instance == null)
@@ -23,7 +26,11 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public void UpdateRotateCount(int count)
+    {
+        RotateCount.text = count.ToString();
+        RotateCount_Animator.SetTrigger("UpdateRotateCount");
+    }
     public void UpdateTimeText(string time)
     {
         timeText.text = time;
