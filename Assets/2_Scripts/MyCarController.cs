@@ -10,23 +10,17 @@ public class MyCarController : MonoBehaviour
 
     public float jumpForce = 7f;
 
-    // Load_1 프리팹을 인스펙터에서 할당
-    public GameObject[] loadPrefab;
-
-    public float lastLoadX = 0f; // 마지막 Load 생성 위치
-
     private float lastZAngle;
     private float totalRotation; // 누적 회전 각도 (도 단위)
     private int rotateCount;     // 360도(한 바퀴) 회전 횟수
 
-    // 복제된 Load 오브젝트를 추적할 리스트
-    private List<GameObject> spawnedLoads = new List<GameObject>();
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         // 시작 시 첫 Load 위치를 현재 위치로 초기화
-        lastLoadX = transform.position.x + 20f;
+
     }
 
     private void Start()
@@ -41,7 +35,6 @@ public class MyCarController : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<SurfaceEffector2D>(out var effector))
         {
-            onGround = true;
             surfaceEffector2D = effector;
 
             // 공중에서 누적 회전이 270도 이상이면 한 바퀴로 판정
@@ -58,7 +51,10 @@ public class MyCarController : MonoBehaviour
             }
         }
     }
-
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        onGround = true;
+    }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<SurfaceEffector2D>(out var effector))
@@ -96,41 +92,26 @@ public class MyCarController : MonoBehaviour
             UIManager.Instance.UpdateRotateCount(rotateCount);
         }
 
-        // Load_1 프리팹 복제 로직 (랜덤 프리팹)
-        if (transform.position.x - lastLoadX >= 0)
+        if(onGround)
         {
-            Vector3 spawnPos = new Vector3(lastLoadX + 52f, 6.03f, 0f);
-            int randomIndex = Random.Range(0, loadPrefab.Length);
-            GameObject newLoad = Instantiate(loadPrefab[randomIndex], spawnPos, Quaternion.identity);
-            spawnedLoads.Add(newLoad);
+            if (Input.GetKey(KeyCode.RightArrow))
+                surfaceEffector2D.speed = surfaceEffector2D.speed < 15f ? surfaceEffector2D.speed + 3f * Time.deltaTime : 15f;
 
-            // 2개 초과 시 가장 먼저 생성된 Load 삭제
-            if (spawnedLoads.Count > 2)
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                Destroy(spawnedLoads[0]);
-                spawnedLoads.RemoveAt(0);
+                surfaceEffector2D.speed = 1f;
             }
-
-            lastLoadX += 52f;
-        }
-
-        if (Input.GetKey(KeyCode.RightArrow))
-            surfaceEffector2D.speed = surfaceEffector2D.speed < 15f ? surfaceEffector2D.speed + 3f * Time.deltaTime : 15f;
-
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            surfaceEffector2D.speed = 1f;
-        }
-        else
-        {
-            surfaceEffector2D.speed = surfaceEffector2D.speed > 5f ? surfaceEffector2D.speed - 3f * Time.deltaTime : surfaceEffector2D.speed + 3f * Time.deltaTime;
+            else
+            {
+                surfaceEffector2D.speed = surfaceEffector2D.speed > 5f ? surfaceEffector2D.speed - 3f * Time.deltaTime : surfaceEffector2D.speed + 3f * Time.deltaTime;
+            }
         }
         UIManager.Instance.UpdateSurfaceText($"Surface Speed : {surfaceEffector2D.speed:F1}");
 
-        if (Input.GetKeyDown(KeyCode.Space) && onGround)
+        /*if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             Jump();
-        }
+        }*/
         UIManager.Instance.UpdateCarSpeedText($"Car Speed : {rb.linearVelocity.magnitude:F1}");
     }
 

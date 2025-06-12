@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class KillZone : MonoBehaviour
 {
-    public MyCarController myCarController;
+    public GameObject MyCar;
     float lastLoadX_Rem;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,16 +11,13 @@ public class KillZone : MonoBehaviour
     }
     private void Start()
     {
-        lastLoadX_Rem = myCarController.lastLoadX;
+
     }
     private void Update()
     {
+        if (MyCar == null)
+            return;
 
-        if (myCarController.lastLoadX > lastLoadX_Rem)
-        {
-            transform.position = new Vector2(transform.position.x + 24f, transform.position.y);
-            lastLoadX_Rem = myCarController.lastLoadX;
-            Debug.Log($"lastLoadRem: {lastLoadX_Rem}, lastLoad: {myCarController.lastLoadX}");
-        }
+        transform.position = new Vector2(MyCar.transform.position.x+24f, transform.position.y);
     }
 }
