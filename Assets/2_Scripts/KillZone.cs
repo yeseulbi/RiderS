@@ -4,7 +4,6 @@ using UnityEngine;
 public class KillZone : MonoBehaviour
 {
     public GameObject MyCar;
-    float lastLoadX_Rem;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameManager.Instance.GameStop();   

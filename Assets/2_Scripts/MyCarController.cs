@@ -12,7 +12,9 @@ public class MyCarController : MonoBehaviour
 
     private float lastZAngle;
     private float totalRotation; // 누적 회전 각도 (도 단위)
-    private int rotateCount;     // 360도(한 바퀴) 회전 횟수
+    public int rotateCount;     // 360도(한 바퀴) 회전 횟수
+
+    public static MyCarController Instance;
 
 
 
@@ -20,6 +22,7 @@ public class MyCarController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         // 시작 시 첫 Load 위치를 현재 위치로 초기화
+        Instance = this;
 
     }
 
@@ -36,6 +39,7 @@ public class MyCarController : MonoBehaviour
         if (collision.gameObject.TryGetComponent<SurfaceEffector2D>(out var effector))
         {
             surfaceEffector2D = effector;
+            surfaceEffector2D.speed = surfaceSpeed; // 초기 속도 설정
 
             // 공중에서 누적 회전이 270도 이상이면 한 바퀴로 판정
             if (Mathf.Abs(totalRotation) >= 270f)
@@ -73,9 +77,12 @@ public class MyCarController : MonoBehaviour
         }
     }
 
+    float surfaceSpeed;
     private void Update()
     {
         if (surfaceEffector2D == null) return;
+
+        surfaceSpeed = surfaceEffector2D.speed;
 
         // 누적 회전 각도 계산
         float currentZ = transform.eulerAngles.z;
@@ -95,7 +102,7 @@ public class MyCarController : MonoBehaviour
         if(onGround)
         {
             if (Input.GetKey(KeyCode.RightArrow))
-                surfaceEffector2D.speed = surfaceEffector2D.speed < 15f ? surfaceEffector2D.speed + 3f * Time.deltaTime : 15f;
+                surfaceEffector2D.speed = surfaceEffector2D.speed < 12f ? surfaceEffector2D.speed + 3f * Time.deltaTime : 12f;
 
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {

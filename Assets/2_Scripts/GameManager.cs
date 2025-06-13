@@ -39,11 +39,17 @@ public class GameManager : MonoBehaviour
             fatestTime = elapsedTime;
             Debug.Log("New fastest time: " + FormatElapsedTime(fatestTime));
         }
-        UIManager.Instance.UpdateCurrentTimeText("Current Time : " + FormatElapsedTime(elapsedTime));
-        UIManager.Instance.UpdateFastTimeText("Fastest Time : " + FormatElapsedTime(fatestTime));
+        UIManager.Instance.UpdateTotal
+            ("Current Time : " + FormatElapsedTime(elapsedTime),
+            "Fastest Time : " + FormatElapsedTime(fatestTime),
+            Coin.Inst.coinCount,
+            MyCarController.Instance.rotateCount);
 
         //3. 패널 활성화 
         UIManager.Instance.ShowPanel();
+
+        UIManager.Instance.RotateCount.gameObject.SetActive(false);
+        Coin.myCoin =+ Coin.Inst.coinCount; // 현재 코인 개수 저장
     }
 
     public void GameRestart()
@@ -68,4 +74,5 @@ public class GameManager : MonoBehaviour
         int milliseconds = (int)((time * 1000) % 1000);
         return string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
     }
+
 }

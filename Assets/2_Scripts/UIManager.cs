@@ -10,8 +10,9 @@ public class UIManager : MonoBehaviour
     public Text carSpeedText;
     public Text currentTimeText;
     public Text fastTimeText;
+    public Text coinText, totalCoin;
 
-    public Text RotateCount;
+    public Text RotateCount, totalTurn;
     public GameObject panel;
 
     public Animator RotateCount_Animator;
@@ -46,14 +47,17 @@ public class UIManager : MonoBehaviour
         carSpeedText.text = speed;
     }
 
-    public void UpdateCurrentTimeText(string time)
+    public void UpdateTotal(string crr_time, string fst_time, int coin, int turn)
     {
-        currentTimeText.text = time;
+        currentTimeText.text = crr_time;
+        fastTimeText.text = fst_time;
+        totalCoin.text = coin + " Coin";
+        totalTurn.text = turn + " Turn";
     }
 
-    public void UpdateFastTimeText(string time)
+    public void UpdateCoinText(int coinCount)
     {
-        fastTimeText.text = time;
+        coinText.text = coinCount + " Coin";
     }
 
     public void ShowPanel()
