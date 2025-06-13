@@ -5,6 +5,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    int coinCount;  // 획득 코인 개수
+
+    public void AddCoin(int amount)
+    {
+        Debug.Log($"코인 획득: {amount}개, 현재 코인: {coinCount}개");
+        coinCount += amount;
+        UIManager.Instance.UpdateCoinText(coinCount);
+    }
+
     private float elapsedTime = 0f;
     private float fatestTime = float.MaxValue;
 
@@ -26,6 +35,20 @@ public class GameManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
 
         UIManager.Instance.UpdateTimeText(FormatElapsedTime(elapsedTime));
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        { 
+            if (UIManager.Instance.ESCPanel.activeSelf)
+            {
+                UIManager.Instance.ESCPanel.SetActive(false);
+                Time.timeScale = 1f; // 게임 재개
+            }
+            else
+            {
+                UIManager.Instance.ESCPanel.SetActive(true);
+                Time.timeScale = 0f; // 게임 일시 정지
+            }
+        }
     }
 
     public void GameStop()
@@ -42,14 +65,16 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateTotal
             ("Current Time : " + FormatElapsedTime(elapsedTime),
             "Fastest Time : " + FormatElapsedTime(fatestTime),
-            Coin.Inst.coinCount,
+            Coin.myCoin,
+            coinCount,
             MyCarController.Instance.rotateCount);
 
         //3. 패널 활성화 
         UIManager.Instance.ShowPanel();
 
         UIManager.Instance.RotateCount.gameObject.SetActive(false);
-        Coin.myCoin =+ Coin.Inst.coinCount; // 현재 코인 개수 저장
+        Coin.myCoin =+ coinCount; // 현재 코인 개수 저장
+        coinCount = 0; // 코인 획득 개수 초기화
     }
 
     public void GameRestart()

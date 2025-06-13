@@ -6,6 +6,8 @@ public class MyCarController : MonoBehaviour
 {
     private SurfaceEffector2D surfaceEffector2D;
     private Rigidbody2D rb;
+    AudioSource Start_Sound, Running_Sound;
+
     private bool onGround = false;
 
     public float jumpForce = 7f;
@@ -21,7 +23,9 @@ public class MyCarController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // 시작 시 첫 Load 위치를 현재 위치로 초기화
+        Running_Sound = GetComponent<AudioSource>();
+        Start_Sound = GameObject.Find("Start_Sound").GetComponent<AudioSource>();
+
         Instance = this;
 
     }
@@ -34,10 +38,12 @@ public class MyCarController : MonoBehaviour
 
     }
 
+    float RunningSound_Time = 0f;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<SurfaceEffector2D>(out var effector))
         {
+            Running_Sound.time = RunningSound_Time;
             surfaceEffector2D = effector;
             surfaceEffector2D.speed = surfaceSpeed; // 초기 속도 설정
 
@@ -58,23 +64,36 @@ public class MyCarController : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         onGround = true;
+        if (!Running_Sound.isPlaying)
+            Running_Sound.Play();
+
+            Running_Sound.volume = Mathf.Clamp(rb.linearVelocity.magnitude / 10f, 0.1f, 1f); // 속도에 따라 볼륨 조절
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
+        RunningSound_Time = Running_Sound.time; // 현재 Running_Sound 시간 저장
         if (collision.gameObject.TryGetComponent<SurfaceEffector2D>(out var effector))
         {
             onGround = false;
         }
+        if (Running_Sound.isPlaying)
+            Running_Sound.Stop();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!Start_Sound.isPlaying && !onGround&& collision.CompareTag("Ground"))
+            Start_Sound.Play();
         if (collision.CompareTag("Obstacle"))
         {
             Destroy(gameObject);
             GameManager.Instance.GameStop();
             Debug.Log($"oops! ({onGround})");
         }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+            Start_Sound.Stop();
     }
 
     float surfaceSpeed;
@@ -120,6 +139,9 @@ public class MyCarController : MonoBehaviour
             Jump();
         }*/
         UIManager.Instance.UpdateCarSpeedText($"Car Speed : {rb.linearVelocity.magnitude:F1}");
+        
+        if (UIManager.Instance.ESCPanel.activeSelf)
+            Running_Sound.Stop();
     }
 
     private void FixedUpdate()
