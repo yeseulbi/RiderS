@@ -4,8 +4,10 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public static int myCoin; // 보유 코인 개수
 
     int coinCount;  // 획득 코인 개수
+    public int TotalTurn;
 
     public void AddCoin(int amount)
     {
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //TotalTurn = 50;
     }
 
     void Update()
@@ -65,15 +68,17 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateTotal
             ("Current Time : " + FormatElapsedTime(elapsedTime),
             "Fastest Time : " + FormatElapsedTime(fatestTime),
-            Coin.myCoin,
+            myCoin,
             coinCount,
             MyCarController.Instance.rotateCount);
 
         //3. 패널 활성화 
         UIManager.Instance.ShowPanel();
 
+        if(MyCarController.Instance.rotateCount>TotalTurn)
+            TotalTurn = MyCarController.Instance.rotateCount;   // 최고 기록 저장
         UIManager.Instance.RotateCount.gameObject.SetActive(false);
-        Coin.myCoin =+ coinCount; // 현재 코인 개수 저장
+        myCoin += coinCount; // 현재 코인 개수 저장
         coinCount = 0; // 코인 획득 개수 초기화
     }
 

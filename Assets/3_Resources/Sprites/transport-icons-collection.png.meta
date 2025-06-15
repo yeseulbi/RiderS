@@ -1,0 +1,542 @@
+fileFormatVersion: 2
+guid: b97faaeab3282754c99f43f06d6be920
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6195944654769809915
+    second: transport-icons-collection_0
+  - first:
+      213: 5715827704571734125
+    second: transport-icons-collection_1
+  - first:
+      213: 4672218108428806491
+    second: transport-icons-collection_2
+  - first:
+      213: 6357350337950506300
+    second: transport-icons-collection_3
+  - first:
+      213: 5905797037914204474
+    second: transport-icons-collection_4
+  - first:
+      213: 5025433443163108970
+    second: transport-icons-collection_5
+  - first:
+      213: -427461514922602468
+    second: transport-icons-collection_6
+  - first:
+      213: 2919015560789241484
+    second: transport-icons-collection_7
+  - first:
+      213: -5568100259249787274
+    second: transport-icons-collection_8
+  - first:
+      213: -7597797408378866715
+    second: transport-icons-collection_9
+  - first:
+      213: 5647276075747645953
+    second: transport-icons-collection_10
+  - first:
+      213: 4768801000820482376
+    second: transport-icons-collection_11
+  - first:
+      213: 8038425884030144272
+    second: transport-icons-collection_12
+  - first:
+      213: -310542761167234008
+    second: transport-icons-collection_13
+  - first:
+      213: -8890142694800067624
+    second: transport-icons-collection_14
+  - first:
+      213: -4376992342526085899
+    second: transport-icons-collection_15
+  - first:
+      213: 8396324434379842169
+    second: transport-icons-collection_16
+  - first:
+      213: 3791154014219985937
+    second: transport-icons-collection_17
+  - first:
+      213: -4532638156169612936
+    second: transport-icons-collection_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32.9
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: transport-icons-collection_0
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 517
+        width: 137
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 506177cf925930aa0800000000000000
+      internalID: -6195944654769809915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_1
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 516
+        width: 121
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d68a5587303b25f40800000000000000
+      internalID: 5715827704571734125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_2
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 513
+        width: 119
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59eb0a7d9d07d040800000000000000
+      internalID: 4672218108428806491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_3
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 514
+        width: 108
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3ddf3e1378d93850800000000000000
+      internalID: 6357350337950506300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_4
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 366
+        width: 120
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a392e60ad1b95f150800000000000000
+      internalID: 5905797037914204474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_7
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 366
+        width: 129
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8e2eaadf2d628820800000000000000
+      internalID: 2919015560789241484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_8
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 367
+        width: 106
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67ee7a5b0522ab2b0800000000000000
+      internalID: -5568100259249787274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scooter
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 367
+        width: 111
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10a108b9ba72f5e40800000000000000
+      internalID: 5647276075747645953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bicycle
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 213
+        width: 104
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 841ae6a7e3f2e2240800000000000000
+      internalID: 4768801000820482376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_12
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 216
+        width: 123
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01f0cea80c93e8f60800000000000000
+      internalID: 8038425884030144272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_13
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 216
+        width: 121
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82cde09010bb0bbf0800000000000000
+      internalID: -310542761167234008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Car
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 216
+        width: 125
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d378e1325edf9480800000000000000
+      internalID: -8890142694800067624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_15
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 47
+        width: 112
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f4b02f97acc143c0800000000000000
+      internalID: -4376992342526085899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_16
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 61
+        width: 124
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 972a422669cb58470800000000000000
+      internalID: 8396324434379842169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: transport-icons-collection_17
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 61
+        width: 105
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 114e0625d72ec9430800000000000000
+      internalID: 3791154014219985937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ship
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 61
+        width: 100
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 871f026ac95d811c0800000000000000
+      internalID: -4532638156169612936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ae5cc9c0fa50d244d9f6ca7003b176f2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bicycle: 4768801000820482376
+      Car: -8890142694800067624
+      Scooter: 5647276075747645953
+      Ship: -4532638156169612936
+      transport-icons-collection_0: -6195944654769809915
+      transport-icons-collection_1: 5715827704571734125
+      transport-icons-collection_12: 8038425884030144272
+      transport-icons-collection_13: -310542761167234008
+      transport-icons-collection_15: -4376992342526085899
+      transport-icons-collection_16: 8396324434379842169
+      transport-icons-collection_17: 3791154014219985937
+      transport-icons-collection_2: 4672218108428806491
+      transport-icons-collection_3: 6357350337950506300
+      transport-icons-collection_4: 5905797037914204474
+      transport-icons-collection_7: 2919015560789241484
+      transport-icons-collection_8: -5568100259249787274
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

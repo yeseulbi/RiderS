@@ -4,13 +4,6 @@ public class Coin : MonoBehaviour
 {
     private ParticleSystem particlesystem;
     private AudioSource audioSource;
-
-    public static int myCoin; // 보유 코인 개수
-
-    private void Awake()
-    { 
-
-    }
     void Start()
     {
         particlesystem = GetComponent<ParticleSystem>();

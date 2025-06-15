@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -84,9 +85,16 @@ public class UIManager : MonoBehaviour
     public void GameContinue()
     {
         ESCPanel.SetActive(false);
+        Time.timeScale = 1f; // 게임 재개
     }
     public void GameSetting()
     {
         SettingPanel.SetActive(true);
+    }
+    public void GameShop()
+    {
+        SceneManager.LoadScene("Shop");
+        if(Shop.Instance!=null)
+            Shop.Instance.ShopObject.SetActive(true);
     }
 }

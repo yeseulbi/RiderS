@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +7,8 @@ public class MyCarController : MonoBehaviour
 {
     private SurfaceEffector2D surfaceEffector2D;
     private Rigidbody2D rb;
-    AudioSource Start_Sound, Running_Sound;
+    AudioSource Start_Sound, Running_Sound, Dead_Sound;
+    ParticleSystem onGround_Particle, Dead_Particle;
 
     private bool onGround = false;
 
@@ -18,13 +20,14 @@ public class MyCarController : MonoBehaviour
 
     public static MyCarController Instance;
 
-
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         Running_Sound = GetComponent<AudioSource>();
-        Start_Sound = GameObject.Find("Start_Sound").GetComponent<AudioSource>();
+        Start_Sound = transform.GetChild(0).GetComponent<AudioSource>();
+        onGround_Particle = transform.GetChild(0).GetComponent<ParticleSystem>();
+        Dead_Sound = transform.GetChild(1).GetComponent<AudioSource>();
+        Dead_Particle = transform.GetChild(1).GetComponent<ParticleSystem>();
 
         Instance = this;
 
@@ -36,16 +39,22 @@ public class MyCarController : MonoBehaviour
         totalRotation = 0f;
         rotateCount = 0;
 
+        var main = onGround_Particle.main;
+        if(Shop.myCar!=null)
+            main.startColor = Shop.myCar.color;
     }
 
     float RunningSound_Time = 0f;
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (isDead)
+            return;
         if (collision.gameObject.TryGetComponent<SurfaceEffector2D>(out var effector))
         {
             Running_Sound.time = RunningSound_Time;
             surfaceEffector2D = effector;
             surfaceEffector2D.speed = surfaceSpeed; // 초기 속도 설정
+            onGround_Particle.Play();
 
             // 공중에서 누적 회전이 270도 이상이면 한 바퀴로 판정
             if (Mathf.Abs(totalRotation) >= 270f)
@@ -63,11 +72,17 @@ public class MyCarController : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if (isDead)
+            return;
         onGround = true;
         if (!Running_Sound.isPlaying)
             Running_Sound.Play();
+        if (!onGround_Particle.isPlaying)
+            onGround_Particle.Play();
 
             Running_Sound.volume = Mathf.Clamp(rb.linearVelocity.magnitude / 10f, 0.1f, 1f); // 속도에 따라 볼륨 조절
+        var main = onGround_Particle.main;
+        main.startSize = Mathf.Clamp(rb.linearVelocity.magnitude / 10f, 0.1f, 1f);
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -78,6 +93,7 @@ public class MyCarController : MonoBehaviour
         }
         if (Running_Sound.isPlaying)
             Running_Sound.Stop();
+        onGround_Particle.Stop();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -86,9 +102,7 @@ public class MyCarController : MonoBehaviour
             Start_Sound.Play();
         if (collision.CompareTag("Obstacle"))
         {
-            Destroy(gameObject);
-            GameManager.Instance.GameStop();
-            Debug.Log($"oops! ({onGround})");
+            Die();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -99,6 +113,8 @@ public class MyCarController : MonoBehaviour
     float surfaceSpeed;
     private void Update()
     {
+        if (isDead)
+            return;
         if (surfaceEffector2D == null) return;
 
         surfaceSpeed = surfaceEffector2D.speed;
@@ -139,7 +155,7 @@ public class MyCarController : MonoBehaviour
             Jump();
         }*/
         UIManager.Instance.UpdateCarSpeedText($"Car Speed : {rb.linearVelocity.magnitude:F1}");
-        
+
         if (UIManager.Instance.ESCPanel.activeSelf)
             Running_Sound.Stop();
     }
@@ -158,7 +174,23 @@ public class MyCarController : MonoBehaviour
             }
         }
     }
-
+    bool isDead = false;
+    public void Die()
+    {
+        isDead = true;
+        onGround_Particle.Stop();
+        Running_Sound.Stop();
+        var die = gameObject.GetComponent<SpriteRenderer>();
+        die.enabled = false;
+        Dead_Sound.Play();
+        Dead_Particle.Play();
+        Destroy(gameObject, 1.1f);
+        Invoke(("Gamestop"), 1f);
+    }
+    void Gamestop()
+    {
+        GameManager.Instance.GameStop();
+    }
     private void Jump()
     {
         if (rb == null) return;

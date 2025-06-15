@@ -6,7 +6,7 @@ public class KillZone : MonoBehaviour
     public GameObject MyCar;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameManager.Instance.GameStop();   
+        MyCarController.Instance.Die();
     }
     private void Start()
     {
