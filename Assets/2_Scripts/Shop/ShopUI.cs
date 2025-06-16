@@ -11,7 +11,7 @@ public class ShopUI : MonoBehaviour
     void Start()
     {
         coinText.text = "보유 코인: "+ myCoin;
-        totalText.text = "최고 기록: " + totalTurns;
+        totalText.text = "최고 기록: " + totalTurns + "회";
 
     }
 
@@ -21,15 +21,14 @@ public class ShopUI : MonoBehaviour
         {
             coinText.text = "보유 코인: " + myCoin;
         }
-        if("최고 기록: " + totalTurns.ToString() != totalText.text)
+        if("최고 기록: " + totalTurns.ToString() + "회" != totalText.text)
         {
-            totalText.text = "최고 기록: " + totalTurns;
+            totalText.text = "최고 기록: " + totalTurns+"회";
         }
     }
     public void GoButton()
     {
         SceneManager.LoadScene("PlayScene");
         Time.timeScale = 1f; // 게임 재개
-        gameObject.SetActive(false);
     }
 }

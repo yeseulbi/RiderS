@@ -29,7 +29,6 @@ public class MyCarController : MonoBehaviour
         Dead_Particle = transform.GetChild(1).GetComponent<ParticleSystem>();
 
         Instance = this;
-
     }
 
     private void Start()
@@ -152,11 +151,11 @@ public class MyCarController : MonoBehaviour
 
         if (UIManager.Instance.ESCPanel.activeSelf)
             Running_Sound.Stop();
-        if( Input.GetKeyDown(KeyCode.Space))
+        /*if( Input.GetKeyDown(KeyCode.Space))
         {
             rotateCount++;
             GameManager.myCoin+=100;
-        }
+        }*/
     }
 
     private void FixedUpdate()

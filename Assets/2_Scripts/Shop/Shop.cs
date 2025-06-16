@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,15 +39,6 @@ public class Shop : MonoBehaviour
     private void Awake()
     {
         ShopObject = gameObject;
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
 
         cars.Add(new Car(carType.Car, 100));
         cars.Add(new Car(carType.Scooter, 200));
@@ -61,7 +54,7 @@ public class Shop : MonoBehaviour
             myCar = new Car();
 
         ColorButton = new Button[5];
-        for (int i=0;i<carSprite.Length;i++)
+        for (int i = 0; i < carSprite.Length; i++)
         {
             carSprite[i] = transform.GetChild(i + 2).GetComponent<SpriteRenderer>();
         }
@@ -71,23 +64,33 @@ public class Shop : MonoBehaviour
         {
             ColorButton[i] = ColorCanvas.GetChild(i).GetComponent<Button>();
         }
-        TotalCheck();
-    }
-    private void Update()
-    {
-        if (carSprite[0].color!=myCar.color)
-            for(int i=0;i<carSprite.Length;i++)
-            {
-                carSprite[i].color = myCar.color;
-            }
-        if(TotalTurn!=GameManager.TotalTurn)
+
+        // 구매 상태 불러오기 및 UI 반영
+        for (int i = 0; i < cars.Count; i++)
         {
-            TotalTurn = GameManager.TotalTurn;
-            TotalCheck();
+            if (PlayerPrefs.GetInt($"CarBought{i}", 0) == 1)
+            {
+                BuyParents.GetChild(i).gameObject.SetActive(false);
+                ButtonParents.GetChild(i + 1).GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                BuyParents.GetChild(i).gameObject.SetActive(true);
+                ButtonParents.GetChild(i + 1).GetComponent<Button>().interactable = false;
+            }
+
+            if (PlayerPrefs.GetInt($"CarCheck{i}", 0) == 1)
+            {
+                ButtonParents.GetChild(i).Find("Check").gameObject.SetActive(true);
+            }
+            else
+                ButtonParents.GetChild(i).Find("Check").gameObject.SetActive(false);
         }
-    }
-    void TotalCheck()
-    {
+        for(int j=1; j<cars.Count;j++)
+        {
+            if(PlayerPrefs.GetInt($"CarCheck{j}", 0) == 0)
+                ButtonParents.GetChild(0).Find("Check").gameObject.SetActive(true);
+        }
         if (TotalTurn >= 15)
             ColorCheck(1);
         if (TotalTurn >= 30)
@@ -96,6 +99,14 @@ public class Shop : MonoBehaviour
             ColorCheck(3);
         if (TotalTurn >= 100)
             ColorCheck(4);
+    }
+    private void Update()
+    {
+        if (carSprite[0].color!=myCar.color)
+            for(int i=0;i<carSprite.Length;i++)
+            {
+                carSprite[i].color = myCar.color;
+            }
     }
     void ColorCheck(int index)
     {
@@ -148,7 +159,11 @@ public class Shop : MonoBehaviour
         for(int i=0; i< ButtonParents.childCount; i++)
         {
             ButtonParents.GetChild(i).Find("Check").gameObject.SetActive(false);
+            PlayerPrefs.SetInt($"CarCheck{i}", 0);
         }
         ButtonParents.GetChild(Index).Find("Check").gameObject.SetActive(true);
+
+        PlayerPrefs.SetInt($"CarCheck{Index}", 1);
+        PlayerPrefs.Save();
     }
 }
