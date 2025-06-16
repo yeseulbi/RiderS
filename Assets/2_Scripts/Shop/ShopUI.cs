@@ -5,22 +5,25 @@ using UnityEngine.UI;
 public class ShopUI : MonoBehaviour
 {
     public Text coinText, totalText;
-    int myCoin;
+    int myCoin => GameManager.myCoin;
+    int totalTurns => GameManager.TotalTurn;
 
     void Start()
     {
-        myCoin = GameManager.myCoin;
-
         coinText.text = "보유 코인: "+ myCoin;
-        totalText.text = "최고 기록: " + GameManager.Instance.TotalTurn;
+        totalText.text = "최고 기록: " + totalTurns;
+
     }
 
     void Update()
     {
-        if(myCoin!= GameManager.myCoin)
+        if("보유 코인: "+myCoin.ToString()!= coinText.text)
         {
-            myCoin = GameManager.myCoin;
             coinText.text = "보유 코인: " + myCoin;
+        }
+        if("최고 기록: " + totalTurns.ToString() != totalText.text)
+        {
+            totalText.text = "최고 기록: " + totalTurns;
         }
     }
     public void GoButton()

@@ -53,28 +53,41 @@ public class Shop : MonoBehaviour
         cars.Add(new Car(carType.Ship, 500));
     }
     SpriteRenderer[] carSprite = new SpriteRenderer[5];
-    Transform ColorCanvas => gameObject.transform.GetChild(0);
+    int TotalTurn = GameManager.TotalTurn;
+    Button[] ColorButton;
     void Start()
     {
         if (myCar == null)
             myCar = new Car();
-        for(int i=0;i<carSprite.Length;i++)
+
+        ColorButton = new Button[5];
+        for (int i=0;i<carSprite.Length;i++)
         {
             carSprite[i] = transform.GetChild(i + 2).GetComponent<SpriteRenderer>();
         }
-        Button[] ColorButton=new Button[5];
-        for(int i=0;i<ColorButton.Length;i++)
+
+        var ColorCanvas = transform.GetChild(0);
+        for (int i = 0; i < ColorButton.Length; i++)
         {
             ColorButton[i] = ColorCanvas.GetChild(i).GetComponent<Button>();
         }
-
-        void ColorCheck(int index)
+        TotalCheck();
+    }
+    private void Update()
+    {
+        if (carSprite[0].color!=myCar.color)
+            for(int i=0;i<carSprite.Length;i++)
+            {
+                carSprite[i].color = myCar.color;
+            }
+        if(TotalTurn!=GameManager.TotalTurn)
         {
-            ColorButton[index].interactable = true;
-            ColorButton[index].GetComponentInChildren<Image>().enabled = false;
+            TotalTurn = GameManager.TotalTurn;
+            TotalCheck();
         }
-
-        var TotalTurn = GameManager.Instance.TotalTurn;
+    }
+    void TotalCheck()
+    {
         if (TotalTurn >= 15)
             ColorCheck(1);
         if (TotalTurn >= 30)
@@ -84,14 +97,12 @@ public class Shop : MonoBehaviour
         if (TotalTurn >= 100)
             ColorCheck(4);
     }
-    private void Update()
+    void ColorCheck(int index)
     {
-        if (carSprite[0].color!=myCar.color)
-            for(int i=0;i<carSprite.Length;i++)
-            {
-                carSprite[i].color = myCar.color;
-            }
+        ColorButton[index].interactable = true;
+        ColorButton[index].GetComponentInChildren<Image>().enabled = false;
     }
+
     public void ColorSet(int Index)  // button. 총 5개
     {
         switch(Index)
@@ -123,6 +134,10 @@ public class Shop : MonoBehaviour
             GameManager.myCoin -= cars[Number].price;
             BuyParents.GetChild(Number).gameObject.SetActive(false);
             ButtonParents.GetChild(Number + 1).GetComponent<Button>().interactable = true;
+
+            // 구매 상태 저장
+            PlayerPrefs.SetInt($"CarBought{Number}", 1);
+            PlayerPrefs.Save();
         }
         else
             Debug.Log($"{cars[Number].price}는 가진 돈보다 많다");

@@ -94,7 +94,14 @@ public class UIManager : MonoBehaviour
     public void GameShop()
     {
         SceneManager.LoadScene("Shop");
-        if(Shop.Instance!=null)
+        if (Shop.Instance != null)
+        {
             Shop.Instance.ShopObject.SetActive(true);
+        }
+    }
+    public void GameExit()
+    {
+        Application.Quit();
+        Debug.Log("게임 종료");
     }
 }

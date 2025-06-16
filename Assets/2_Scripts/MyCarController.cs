@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -149,15 +148,15 @@ public class MyCarController : MonoBehaviour
             }
         }
         UIManager.Instance.UpdateSurfaceText($"Surface Speed : {surfaceEffector2D.speed:F1}");
-
-        /*if (Input.GetKeyDown(KeyCode.Space) && onGround)
-        {
-            Jump();
-        }*/
         UIManager.Instance.UpdateCarSpeedText($"Car Speed : {rb.linearVelocity.magnitude:F1}");
 
         if (UIManager.Instance.ESCPanel.activeSelf)
             Running_Sound.Stop();
+        if( Input.GetKeyDown(KeyCode.Space))
+        {
+            rotateCount++;
+            GameManager.myCoin+=100;
+        }
     }
 
     private void FixedUpdate()
